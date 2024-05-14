@@ -101,6 +101,7 @@ const Wallet = ({children}) => {
     provider: null,
     account: null,
     LiskPayContract: null,
+    balance: null,
     chainId: null,  
   });
 
@@ -125,6 +126,7 @@ const Wallet = ({children}) => {
           provider: null,
           account: null,
           LiskPayContract: null,
+          balance: null,
           chainId: null,
         });
       } else {
@@ -133,18 +135,21 @@ const Wallet = ({children}) => {
           provider,
           selectedAccount,
           LiskPayContract,
+          balance,
           chainId,
         } = await connectWallet();
                     console.log(
                   "Provider:", provider,
                   "selectedAccount:",selectedAccount,
                   "LiskPayContract:",LiskPayContract,
+                  "balance:", balance,
                   "chainId:",chainId,  
             )
         setState({
           provider,
           selectedAccount,
           LiskPayContract,
+          balance,
           chainId,
         });
       }

@@ -126,7 +126,8 @@ import { liskPayAddress, liskPay } from "../context/constant";
 
 export const connectWallet = async () => {
   try {
-    let [signer, LiskPayContract, provider, chainId] = [
+    let [signer, LiskPayContract, provider, chainId, balance] = [
+      null,
       null,
       null,
       null,
@@ -153,13 +154,16 @@ export const connectWallet = async () => {
     const liskPayContractAddress = liskPayAddress;
     LiskPayContract = new Contract(liskPayContractAddress, liskPay, signer);
 
-    // const balance = await LiskPayContract.getBalance(selectedAccount);
-    // const balanceInWei = ethers.utils.formatUnits(balance.toString(), 18);
+   const BigNumBalance = await provider.getBalance(selectedAccount);
+   console.log(BigNumBalance);
+   balance  = Number(ethers.formatEther(BigNumBalance));
+   console.log(balance);
 
 
     return {
       provider,
       selectedAccount,
+      balance,
       // balanceInWei,
       LiskPayContract,
       chainId,
